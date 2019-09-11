@@ -30,8 +30,8 @@ config = {
 }
 
 config_test = {
-    'bsds500': {'data_root': 'path_to/bsds500/BSR/BSDS500/data/',
-                'data_lst': 'test_pair.lst',
+    'bsds500': {'data_root': '/run/user/1000/gvfs/smb-share:server=192.168.0.253,share=data/Master/datasets/desk_neon_rpy/rgb/',
+                'data_lst': 'test.lst',
                 'mean_bgr': [104.00699, 116.66877, 122.67892],
                 'yita': 0.5},
     'bsds500_val': {'data_root': 'path_to/bsds500/BSR/BSDS500/data/',
@@ -65,4 +65,8 @@ config_test = {
 }
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     print (config.keys())
+=======
+    print(config.keys())
+>>>>>>> master

@@ -207,10 +207,14 @@ class BDCN(nn.Module):
         # print self.conv1_1_down.weight
 
 if __name__ == '__main__':
-    model = BDCN('./caffemodel2pytorch/vgg16.pth')
+    model = BDCN('./models/vgg16.pth')
     a=torch.rand((2,3,100,100))
     a=torch.autograd.Variable(a)
     for x in model(a):
+<<<<<<< HEAD
         print (x.data.shape)
+=======
+        print(x.data.shape)
+>>>>>>> master
     # for name, param in model.state_dict().items():
     #     print name, param
