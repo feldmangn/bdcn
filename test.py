@@ -56,12 +56,12 @@ def test(model, args):
             os.mkdir(os.path.join(save_dir, 'fuse'))
         cv2.imwrite(os.path.join(save_dir, 'fuse', '%s.png'%nm[i]), 255-fuse*255)
         all_t += time.time() - tm
-    print all_t
-    print 'Overall Time use: ', time.time() - start_time
+    print (all_t)
+    print ('Overall Time use: ', time.time() - start_time)
 
 def main():
     import time
-    print time.localtime()
+    print (time.localtime())
     args = parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     model = bdcn.BDCN()
@@ -76,7 +76,7 @@ def parse_args():
         help='whether use gpu to train network')
     parser.add_argument('-g', '--gpu', type=str, default='0',
         help='the gpu id to train net')
-    parser.add_argument('-m', '--model', type=str, default='params/bdcn_final.pth',
+    parser.add_argument('-m', '--model', type=str, default='/home/pc/Documents/BiDirectionalCascadeEdge/datasets/final-model/bdcn_pretrained_on_bsds500.pth',
         help='the model to test')
     parser.add_argument('--res-dir', type=str, default='result',
         help='the dir to store result')

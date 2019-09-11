@@ -65,4 +65,4 @@ config_test = {
 }
 
 if __name__ == '__main__':
-    print config.keys()
+    print (config.keys())

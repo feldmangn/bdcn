@@ -6,7 +6,7 @@ import scipy.io
 import torch
 from torch.utils import data
 import random
-from cStringIO import StringIO
+from io import StringIO
 
 
 def load_image_with_cache(path, cache=None, lock=None):

@@ -23,7 +23,6 @@ def make_dir(data_dir):
     if not os.path.exists(data_dir):
         os.mkdir(data_dir)
 
-
 def test(model, args):
     test_root = args.data_root
     if args.test_lst is not None:
@@ -36,10 +35,6 @@ def test(model, args):
         test_lst = os.listdir(test_root)
     print(test_lst[0])
     save_sideouts = 1
-    if save_sideouts:
-        for j in xrange(5):
-            make_dir(os.path.join(save_dir, 's2d_'+str(k)))
-            make_dir(os.path.join(save_dir, 'd2s_'+str(k)))
     mean_bgr = np.array([104.00699, 116.66877, 122.67892])
     save_dir = args.res_dir
     if not os.path.exists(save_dir):
@@ -67,7 +62,7 @@ def test(model, args):
         if save_sideouts:
             out = [F.sigmoid(x).cpu().data.numpy()[0, 0, :, :] for x in out]
             k = 1
-            for j in xrange(5):
+            for j in range(5):
                 # savemat(osp.join(save_dir, 's2d_'+str(k), nm+'.mat'), {'prob': out[j]})
                 cv2.imwrite(os.path.join(save_dir, 's2d_'+str(k), '%s.jpg'%nm[i]), 255-t*255)
                 # savemat(osp.join(save_dir, 'd2s_'+str(k), nm+'.mat'), {'prob': out[j+5]})
@@ -79,18 +74,18 @@ def test(model, args):
             os.mkdir(os.path.join(save_dir, 'fuse'))
         cv2.imwrite(os.path.join(save_dir, 'fuse/%s.png'%nm.split('/')[-1].split('.')[0]), 255*out[-1])
         all_t += time.time() - t1
-    print all_t
-    print 'Overall Time use: ', time.time() - start_time
+    print (all_t)
+    print ('Overall Time use: ', time.time() - start_time)
 
 def main():
     import time
-    print time.localtime()
+    print (time.localtime())
     args = parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     model = bdcn.BDCN(rate=args.rate)
     model.load_state_dict(torch.load('%s' % (args.model)))
     # print model.fuse.weight.data, model.fuse.bias.data
-    print model.fuse.weight.data
+    print (model.fuse.weight.data)
     test(model, args)
 
 def parse_args():
