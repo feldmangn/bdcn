@@ -65,8 +65,4 @@ config_test = {
 }
 
 if __name__ == '__main__':
-<<<<<<< HEAD
-    print (config.keys())
-=======
     print(config.keys())
->>>>>>> master

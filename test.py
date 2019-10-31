@@ -3,7 +3,6 @@ import torch
 import torch.optim as optim
 import torch.nn as nn
 from torch.autograd import Variable
-from torch.nn import functional as F
 import time
 import re
 import os
@@ -52,19 +51,11 @@ def test(model, args):
         data = Variable(data, volatile=True)
         tm = time.time()
         out = model(data)
-        fuse = F.sigmoid(out[-1]).cpu().data.numpy()[0, 0, :, :]
+        fuse = torch.sigmoid(out[-1]).cpu().data.numpy()[0, 0, :, :]
         if not os.path.exists(os.path.join(save_dir, 'fuse')):
             os.mkdir(os.path.join(save_dir, 'fuse'))
         cv2.imwrite(os.path.join(save_dir, 'fuse', '%s.png' % nm[i]), 255-fuse*255)
         all_t += time.time() - tm
-<<<<<<< HEAD
-    print (all_t)
-    print ('Overall Time use: ', time.time() - start_time)
-
-def main():
-    import time
-    print (time.localtime())
-=======
     print(all_t)
     print('Overall Time use: ', time.time() - start_time)
 
@@ -72,7 +63,6 @@ def main():
 def main():
     import time
     print(time.localtime())
->>>>>>> master
     args = parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     model = bdcn.BDCN()
@@ -82,27 +72,12 @@ def main():
 
 def parse_args():
     parser = argparse.ArgumentParser('test BDCN')
-<<<<<<< HEAD
-    parser.add_argument('-d', '--dataset', type=str, choices=cfg.config_test.keys(),
-        default='bsds500', help='The dataset to train')
-    parser.add_argument('-c', '--cuda', action='store_true',
-        help='whether use gpu to train network')
-    parser.add_argument('-g', '--gpu', type=str, default='0',
-        help='the gpu id to train net')
-    parser.add_argument('-m', '--model', type=str, default='/home/pc/Documents/BiDirectionalCascadeEdge/datasets/final-model/bdcn_pretrained_on_bsds500.pth',
-        help='the model to test')
-    parser.add_argument('--res-dir', type=str, default='result',
-        help='the dir to store result')
-    parser.add_argument('-k', type=int, default=1,
-        help='the k-th split set of multicue')
-=======
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config_test.keys(), default='bsds500', help='The dataset to train')
     parser.add_argument('-c', '--cuda', action='store_true', help='whether use gpu to train network')
     parser.add_argument('-g', '--gpu', type=str, default='0', help='the gpu id to train net')
-    parser.add_argument('-m', '--model', type=str, default='params/bdcn_final.pth', help='the model to test')
+    parser.add_argument('-m', '--model', type=str, default='/home/pc/Documents/BiDirectionalCascadeEdge/params/bdcn_pretrained_on_bsds500.pth', help='the model to test')
     parser.add_argument('--res-dir', type=str, default='result', help='the dir to store result')
     parser.add_argument('-k', type=int, default=1, help='the k-th split set of multicue')
->>>>>>> master
     return parser.parse_args()
 
 
