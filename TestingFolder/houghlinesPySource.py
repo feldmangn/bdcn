@@ -36,13 +36,13 @@ def display_line(image, line):
 # processing image for detecting edge using canny edge detection and blur the image using gaussian blur
 def proceesed_img(original_image):
     proceesed_img = cv2.cvtColor(original_image, cv2.COLOR_BGR2GRAY)
-    proceesed_img = cv2.GaussianBlur(proceesed_img, (5, 5), 0)
+    proceesed_img = cv2.GaussianBlur(proceesed_img, (9, 9), 0)
     proceesed_img = cv2.Canny(proceesed_img, threshold1=100, threshold2=120)
     cv2.imshow("test", proceesed_img)
     cv2.waitKey(0)
     # these polygon repressent the data point within with the pixel data are selected for lane detection
-    polygons = np.array([[10, 380], [10, 600], [800, 600], [800, 300], [100, 300]])
-    proceesed_img = roi(proceesed_img, [polygons])
+    # polygons = np.array([[10, 800], [10, 800], [800, 600], [800, 0], [100, 0]])
+    # proceesed_img = roi(proceesed_img, [polygons])
     return proceesed_img
 
 time.sleep(3)
