@@ -75,7 +75,7 @@ def parse_args():
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config_test.keys(), default='bsds500', help='The dataset to train')
     parser.add_argument('-c', '--cuda', action='store_true', help='whether use gpu to train network')
     parser.add_argument('-g', '--gpu', type=str, default='0', help='the gpu id to train net')
-    parser.add_argument('-m', '--model', type=str, default='/home/pc/Documents/BiDirectionalCascadeEdge/params/bdcn_pretrained_on_bsds500.pth', help='the model to test')
+    parser.add_argument('-m', '--model', type=str, default='models/bdcn_pretrained_on_bsds500.pth', help='the model to test')
     parser.add_argument('--res-dir', type=str, default='result', help='the dir to store result')
     parser.add_argument('-k', type=int, default=1, help='the k-th split set of multicue')
     return parser.parse_args()

@@ -236,6 +236,3 @@ def parse_args():
 
 if __name__ == '__main__':
     main()
-
-
-# python train.py -p /home/tom/University/repositories/projects/bdcn/models/bdcn_algo_on_bsds500.pth --max_iter 10000 --cuda
