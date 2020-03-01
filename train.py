@@ -14,7 +14,6 @@ import cfg
 import log
 import cv2
 
-
 def adjust_learning_rate(optimizer, steps, step_size, gamma=0.1, logger=None):
     """Sets the learning rate to the initial LR decayed by 10 every 30 epochs"""
 
@@ -29,7 +28,10 @@ def cross_entropy_loss2d(inputs, targets, cuda=False, balance=1.1):
     :param inputs: inputs is a 4 dimensional data nx1xhxw
     :param targets: targets is a 3 dimensional data nx1xhxw
     :return:
+
+pip3 install --upgrade setuptools --user
     """
+
     n, c, h, w = inputs.size()
     weights = np.zeros((n, c, h, w))
     for i in xrange(n):
@@ -102,7 +104,7 @@ def train(model, args):
                 params += [{'params': v, 'lr': base_lr*0.001, 'weight_decay': weight_decay*1, 'name': key}]
             elif 'bias' in key:
                 params += [{'params': v, 'lr': base_lr*0.002, 'weight_decay': weight_decay*0, 'name': key}]
-                
+
     optimizer = torch.optim.SGD(params, momentum=args.momentum, lr=args.base_lr, weight_decay=args.weight_decay)
     #optimizer = torch.optim.Adam(params, lr=args.base_lr, weight_decay=args.weight_decay)
     start_step = 1

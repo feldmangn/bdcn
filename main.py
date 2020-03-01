@@ -70,7 +70,7 @@ def forwardAll(model, args):
     
     mean_bgr = np.array(cfg.config_test[args.dataset]['mean_bgr'])
     test_img = Data(test_root, test_lst, mean_bgr=mean_bgr, shuffle=False, crop_padding=0, crop_size=None)
-    testloader = torch.utils.data.DataLoader(test_img, batch_size=1, shuffle=False, num_workers=mp.cpu_count())
+    testloader = torch.utils.data.DataLoader(test_img, batch_size=1, shuffle=False, num_workers=1)
     # nm = np.loadtxt(test_name_lst, dtype=str)
     # print(len(testloader), len(nm))
     # assert len(testloader) == len(nm)
@@ -114,9 +114,8 @@ def forwardAll(model, args):
 
 
 def main():
-    # tempImgToGray = cv2.imread("/home/pc/Documents/BiDirectionalCascadeEdge/images/croppedBullRolls/image001cop.png", 0)
-    # cv2.imwrite('/home/pc/Documents/BiDirectionalCascadeEdge/images/croppedBullRolls/image001cop.jpg',tempImgToGray )
 
+    inputDir = ['images']
     args = parse_args()
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu
     logging.info('Loading model...')
@@ -125,9 +124,8 @@ def main():
     model.load_state_dict(torch.load('%s' % (args.model)))
     logging.info('Start image processing...')
 
-    inputDirs = ['/home/pc/Documents/BiDirectionalCascadeEdge/images/wrongImages']
 
-    for inputDir in inputDirs:
+    for inputDir in inputDir:
       args.inputDir = inputDir
       args.cuda = True
       forwardAll(model, args)
@@ -136,10 +134,10 @@ def main():
 def parse_args():
     parser = argparse.ArgumentParser('test BDCN')
     parser.add_argument('-d', '--dataset', type=str, choices=cfg.config_test.keys(), default='bsds500', help='The dataset to train')
-    parser.add_argument('-i', '--inputDir', type=str, default=None, help='Input image directory for testing.')
+    parser.add_argument('-i', '--inputDir', type=str, default='images/ToScan', help='Input image directory for testing.')
     parser.add_argument('-c', '--cuda', action='store_true', help='whether use gpu to train network', default=True)
     parser.add_argument('-g', '--gpu', type=str, default='0', help='the gpu id to train net')
-    parser.add_argument('-m', '--model', type=str, default='/home/pc/Documents/BiDirectionalCascadeEdge/params/bdcn_pretrained_on_nyudv2_depth.pth', help='the model to test')
+    parser.add_argument('-m', '--model', type=str, default='models/bdcn_pretrained_on_nyudv2_depth.pth', help='the model to test')
     parser.add_argument('--res-dir', type=str, default='bdcn', help='the dir to store result')
     parser.add_argument('-k', type=int, default=2, help='the k-th split set of multicue')
     return parser.parse_args()

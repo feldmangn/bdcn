@@ -1,3 +1,0 @@
-# filename time[ms]
-47.jpg 180.659056
-21.jpg 154.198647
