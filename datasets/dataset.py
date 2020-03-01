@@ -2,12 +2,9 @@ import os
 import cv2
 import numpy as np
 from PIL import Image
-import scipy.io
 import torch
 from torch.utils import data
 import random
-from io import StringIO
-import cv2
 
 
 def load_image_with_cache(path, cache=None, lock=None):
