@@ -4,7 +4,7 @@
 This repo is an implementation of BCDN  in Python3 that's actually runnable out of the box on your own images. If you want to train your own model or go deeper in the code, consider looking into the original repo for more information. For this implementation an Nvidia GPU is needed.
 
 
-![Example](https://github.com/YacobBY/bdcn/blob/master/images/bdcn/2.jpg)
+![Example](https://github.com/YacobBY/bdcn/blob/master/images/ReadmeImages/ReadmeExample.jpg)
 
 ### Installing:
 If you don't have Pytorch installed: first go to the Pytorch site and install it. If you have an Nvidia GPU be sure to get the exact version of CUDA which matches the Pytorch version (At the moment of writing CUDA is on 10.2 but Pytorch on CUDA10.1)
